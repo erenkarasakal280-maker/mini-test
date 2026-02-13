@@ -1,312 +1,120 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sevgililer Günü Özel ❤️</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Pacifico&display=swap');
+!DOCTYPE html
+html lang=tr
+head
+    meta charset=UTF-8
+    meta name=viewport content=width=device-width, initial-scale=1.0
+    titleSana Özel ❤️title
+    style
+        @import url('httpsfonts.googleapis.comcss2family=Poppinswght@300;600&family=Pacifico&display=swap');
+        body { margin 0; padding 0; display flex; justify-content center; align-items center; min-height 100vh; background linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); font-family 'Poppins', sans-serif; overflow hidden; text-align center; }
+        .container { background rgba(255, 255, 255, 0.95); padding 2rem; border-radius 20px; box-shadow 0 10px 30px rgba(0,0,0,0.1); width 85%; max-width 400px; position relative; }
+        h1 { font-family 'Pacifico', cursive; color #ff4757; font-size 1.8rem; margin-bottom 1rem; }
+        p { color #555; font-size 1rem; margin-bottom 1.5rem; line-height 1.5; }
+        .btn-group { display flex; flex-direction column; gap 12px; position relative; min-height 120px; justify-content center; }
+        button { background #ff4757; color white; border none; padding 12px 20px; font-size 1rem; border-radius 50px; cursor pointer; transition all 0.3s ease; box-shadow 0 4px 15px rgba(255, 71, 87, 0.3); font-family 'Poppins', sans-serif; font-weight 600; width 100%; }
+        buttonhover { transform translateY(-2px); background #e84118; }
+        button.secondary { background #fff; color #ff4757; border 2px solid #ff4757; }
+        .step { display none; animation fadeIn 0.5s ease; }
+        .step.active { display block; }
+        @keyframes fadeIn { from { opacity 0; transform translateY(20px); } to { opacity 1; transform translateY(0); } }
+        .emoji { font-size 3rem; display block; margin-bottom 10px; }
+        #runaway-btn { position absolute; left 0; right 0; margin auto; transition top 0.1s, left 0.1s; z-index 10; }
+        .confetti { position fixed; width 10px; height 10px; background-color #f00; animation fall linear forwards; z-index 99; }
+        @keyframes fall { to { transform translateY(100vh) rotate(720deg); } }
+    style
+head
+body
 
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            text-align: center;
+    div class=container
+        div class=step active id=step1
+            span class=emoji🌶️span
+            h1Küçük Bir Doğrulamah1
+            pTeste başlamadan önce...brAcıbiberi sever misinp
+            div class=btn-group style=min-height auto;
+                button onclick=nextStep(2)Evet 🌶️button
+                button class=secondary onclick=nextStep(2)Hayır 😌button
+            div
+        div
+
+        div class=step id=step2
+            span class=emoji🍀span
+            h1Bilin Bakalımh1
+            pDünyanın en şanslı erkeği kimin sevgilisip
+            div class=btn-group
+                button onclick=nextStep(3) style=z-index 20;BENİM! (Yani Senin) 😎button
+                button id=runaway-btn class=secondary ontouchstart=moveButton() onmouseover=moveButton() onclick=moveButton()Başkasının 🙄button
+            div
+        div
+
+        div class=step id=step3
+            span class=emoji🏝️span
+            h1Issız Adah1
+            pIssız adaya düşsen yanına alacağın tek tatlı şeyp
+            div class=btn-group style=min-height auto;
+                button onclick=nextStep(4)Tabii ki Sen 😏button
+                button class=secondary onclick=alert('Aşk olsun... Neyse ben çikolatadan daha tatlıyım!'); nextStep(4)Çikolata 🍫button
+            div
+        div
+
+        div class=step id=step4
+            span class=emoji💃span
+            h1Güzellik Sırrıh1
+            pSence benim gözümde en büyüleyici halin hangisip
+            div class=btn-group style=min-height auto;
+                button onclick=showBeautyMessage()Sabah uyanmış doğal halim 😴button
+                button class=secondary onclick=showBeautyMessage()Süslenmiş halim 💃button
+            div
+        div
+
+        div class=step id=step5
+            span class=emoji💆‍♀️span
+            h1Kritik Soruh1
+            pAşkım canım çok istedi...brBugün tek başıma birazcık bSpa'yab gidip gelse olur mup
+            div class=btn-group style=min-height auto;
+                button onclick=spaResponse()Git tabii ✨button
+                button class=secondary onclick=spaResponse()Git ama çabuk gel 😌button
+            div
+        div
+
+        div class=step id=step6
+            span class=emoji❤️span
+            h1Final Sorusuh1
+            pSence seni ne kadar seviyorump
+            div class=btn-group style=min-height auto;
+                button onclick=finishTest()Tahmin edilemeyecek kadarbutton
+                button class=secondary onclick=finishTest()Ölçülemeyecek kadarbutton
+            div
+        div
+
+        div class=step id=step7
+            span class=emoji💘span
+            h1SONSUZ!h1
+            pTahmin edilemeyecek kadar değil…brbSonsuz kadar seviyorum!bbrbrSevgililer Günümüz Kutlu Olsun! 🌹p
+        div
+    div
+
+    script
+        function nextStep(n) {
+            document.querySelectorAll('.step').forEach(s = s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
         }
-
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: #ff4757;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            color: #555;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.5;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        button {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            background: #e84118;
-        }
-
-        button.secondary {
-            background: #fff;
-            color: #ff4757;
-            border: 2px solid #ff4757;
-        }
-
-        button.secondary:hover {
-            background: #ff4757;
-            color: white;
-        }
-
-        /* Kaçan Buton Stili */
-        #runaway-btn {
-            position: relative; /* Normal akışta kalsın ama js ile absolute olacak */
-        }
-
-        .step {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Arkaplan Kalpleri */
-        .heart-bg {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.5);
-            animation: float 6s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        .emoji {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .final-text {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2f3542;
-        }
-        
-        /* Final Animasyonu */
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(720deg); }
-        }
-
-    </style>
-</head>
-<body>
-
-    <div id="bg-hearts"></div>
-
-    <div class="container">
-        <div class="step active" id="step1">
-            <span class="emoji">🌶️</span>
-            <h1>Küçük Bir Doğrulama</h1>
-            <p>Bu teste başlamadan önce sormam lazım...<br>Acıbiberi sever misin?</p>
-            <div class="btn-group">
-                <button onclick="nextStep(2)">Evet, bayılırım! 🌶️</button>
-                <button class="secondary" onclick="nextStep(2)">Hayır, yanarım 😌</button>
-            </div>
-        </div>
-
-        <div class="step" id="step2">
-            <span class="emoji">🍀</span>
-            <h1>Bilin Bakalım?</h1>
-            <p>Dünyanın en şanslı erkeği kimin sevgilisi?</p>
-            <div class="btn-group" style="position: relative; height: 120px;">
-                <button onclick="nextStep(3)" style="position: absolute; top: 0; left: 0; right: 0; margin: auto;">BENİM! (Yani Senin) 😎</button>
-                
-                <button id="runaway-btn" class="secondary" onmouseover="moveButton()" onclick="moveButton()" style="position: absolute; top: 60px; left: 0; right: 0; margin: auto;">Başkasının 🙄</button>
-            </div>
-        </div>
-
-        <div class="step" id="step3">
-            <span class="emoji">🏝️</span>
-            <h1>Issız Ada</h1>
-            <p>Farz edelim ki ıssız bir adaya düştün… Yanına alabileceğin o tek “tatlı” şey ne olurdu?</p>
-            <div class="btn-group">
-                <button onclick="nextStep(4)">Tabii ki Sen 😏</button>
-                <button class="secondary" onclick="alert('Aşk olsun... Neyse ben çikolatadan daha tatlıyım, devam et! 😉'); nextStep(4)">Çikolata 🍫</button>
-            </div>
-        </div>
-
-        <div class="step" id="step4">
-            <span class="emoji">💃</span>
-            <h1>Güzellik Sırrı</h1>
-            <p>Sence benim gözümde senin en büyüleyici halin hangisi?</p>
-            <div class="btn-group">
-                <button onclick="showBeautyMessage()">Sabah uyanmış doğal halim 😴</button>
-                <button class="secondary" onclick="showBeautyMessage()">Saatlerce süslenmiş halim 💃</button>
-            </div>
-        </div>
-
-        <div class="step" id="step5">
-            <span class="emoji">💆‍♀️</span>
-            <h1>Kritik Soru</h1>
-            <p>Aşkım, canım çok istedi…<br>Bugün tek başıma birazcık <b>Spa'ya</b> gidip gelse olur mu?</p>
-            <div class="btn-group">
-                <button onclick="spaResponse()">Git tabii ✨</button>
-                <button class="secondary" onclick="spaResponse()">Git ama çabuk gel 😌</button>
-            </div>
-        </div>
-
-        <div class="step" id="step6">
-            <span class="emoji">❤️</span>
-            <h1>Final Sorusu</h1>
-            <p>Sence seni ne kadar seviyorum?</p>
-            <div class="btn-group">
-                <button onclick="finishTest()">Tahmin edilemeyecek kadar</button>
-                <button class="secondary" onclick="finishTest()">Ölçülemeyecek kadar</button>
-            </div>
-        </div>
-
-        <div class="step" id="step7">
-            <span class="emoji">💘</span>
-            <h1>Sonsuz!</h1>
-            <p class="final-text">Tahmin edilemeyecek kadar değil…<br>Sonsuz kadar seviyorum! ❤️<br><br>Sevgililer Günümüz Kutlu Olsun!</p>
-        </div>
-    </div>
-
-    <script>
-        // Sayfa geçiş fonksiyonu
-        function nextStep(stepNumber) {
-            // Tüm adımları gizle
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
-            // İstenen adımı göster
-            document.getElementById('step' + stepNumber).classList.add('active');
-        }
-
-        // Kaçan Buton Fonksiyonu (2. Soru için)
         function moveButton() {
             const btn = document.getElementById('runaway-btn');
-            const container = document.querySelector('.container');
-            
-            // Container sınırları içinde rastgele pozisyon
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = btn.getBoundingClientRect();
-            
-            // Basit rastgelelik (mobilde ekrandan taşmaması için sınırlar)
-            const maxX = containerRect.width - btnRect.width - 20;
-            const maxY = 200; // Çok aşağı gitmesin
-
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-
-            btn.style.position = 'absolute';
-            btn.style.left = randomX + 'px';
-            btn.style.top = randomY + 'px';
+            const x = Math.random()  (200 - (-200)) + (-200); 
+            const y = Math.random()  (150 - (-150)) + (-150);
+            btn.style.transform = `translate(${x}px, ${y}px)`;
         }
-
-        // Güzellik Sorusu Mesajı
-        function showBeautyMessage() {
-            alert("Cevap veriyorum: İkisi de! Benim için her halinle dünyadaki en güzel şeysin. 😍");
-            nextStep(5);
-        }
-
-        // Spa Sorusu Tepkisi
-        function spaResponse() {
-            alert("Biraz daha kıskançlık beklerdim 😎 Spa iptal, teste devam!");
-            nextStep(6);
-        }
-
-        // Final Animasyonu
-        function finishTest() {
-            nextStep(7);
-            createConfetti();
-        }
-
-        // Konfeti / Kalp Yağmuru
+        function showBeautyMessage() { alert(İkisi de! Benim için her halinle dünyadaki en güzel şeysin. 😍); nextStep(5); }
+        function spaResponse() { alert(Biraz daha kıskançlık beklerdim 😎 Spa iptal, teste devam!); nextStep(6); }
+        function finishTest() { nextStep(7); createConfetti(); }
         function createConfetti() {
-            const colors = ['#ff4757', '#2ed573', '#1e90ff', '#ffa502'];
-            
-            for(let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Kalp şekli vermek istersen burayı açabilirsin, şimdilik kare konfeti
-                // confetti.innerHTML = '❤️'; 
-                // confetti.style.backgroundColor = 'transparent';
-                
-                document.body.appendChild(confetti);
-                
-                // Temizlik
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
+            for(let i=0; i50; i++) {
+                const c = document.createElement('div'); c.className = 'confetti';
+                c.style.left = Math.random()100+'vw'; c.style.animationDuration = (Math.random()2+2)+'s';
+                c.style.backgroundColor = ['#f00','#0f0','#00f','#ff0'][Math.floor(Math.random()4)];
+                document.body.appendChild(c);
             }
         }
-
-        // Arkaplan Kalpleri Oluştur
-        function createBackgroundHearts() {
-            const bg = document.getElementById('bg-hearts');
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-bg');
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                bg.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 6000);
-            }, 300);
-        }
-
-        // Başlangıçta arkaplan efektini çalıştır
-        createBackgroundHearts();
-
-    </script>
-</body>
-</html>
+    script
+body
+html
