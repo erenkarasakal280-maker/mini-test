@@ -6,9 +6,7 @@
 <title>Mini Test</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -22,22 +20,11 @@ body {
     overflow: hidden;
 }
 
-.step {
-    display: none;
-    padding: 20px;
-}
+.step { display: none; padding: 20px; }
+.step.active { display: block; }
 
-.step.active {
-    display: block;
-}
-
-h1 {
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 1.1rem;
-}
+h1 { margin-bottom: 15px; }
+p { font-size: 1.1rem; }
 
 button {
     padding: 12px 22px;
@@ -46,23 +33,13 @@ button {
     border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: 0.2s;
 }
 
-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
+button:hover { transform: scale(1.05); }
 
-.btn {
-    background: #ff4d6d;
-    color: white;
-}
-
-.btn-secondary {
-    background: #444;
-    color: white;
-}
+.btn { background: #ff4d6d; color: white; }
+.btn-secondary { background: #444; color: white; }
 
 /* Celebration */
 
@@ -80,7 +57,7 @@ button:hover {
     inset: 0;
     background: rgba(0,0,0,0);
     backdrop-filter: blur(0px);
-    transition: background 1.5s ease, backdrop-filter 1.5s ease;
+    transition: 1.5s ease;
     z-index: 1;
 }
 
@@ -93,8 +70,8 @@ button:hover {
     position: relative;
     z-index: 2;
     color: white;
-    animation: fadeIn 1.5s ease forwards;
     opacity: 0;
+    animation: fadeIn 1.5s ease forwards;
 }
 
 #typewriter {
@@ -111,55 +88,49 @@ button:hover {
 }
 
 @keyframes floatUp {
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
+    to { transform: translateY(-110vh); opacity: 0; }
 }
 
 @keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+    to { opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
-
 <!-- STEP 1 -->
 <div id="step1" class="step active">
-    <h1>Mini Test Başlıyor</h1>
-    <button class="btn" onclick="nextStep(1,2)">Başla</button>
+    <h1>Zor Karar 🤔</h1>
+    <p>Farz edelim ki ıssız bir adaya düştün… Yanına alabileceğin o tek “tatlı” şey ne olurdu?</p>
+    <button class="btn" onclick="nextStep(1,2)">Sen 😌</button>
+    <button class="btn-secondary" onclick="nextStep(1,2)">Çikolata 🍫</button>
 </div>
 
 <!-- STEP 2 -->
 <div id="step2" class="step">
-    <h1>Issız adaya düşsek...</h1>
-    <p>Yanına kimi alırsın?</p>
-    <button class="btn" onclick="nextStep(2,3)">Seni</button>
-    <button class="btn-secondary" onclick="nextStep(2,3)">WiFi</button>
+    <h1>Güzellik Sırrı 🌸</h1>
+    <p>Sence benim gözümde senin en büyüleyici halin hangisi?</p>
+    <button class="btn" onclick="nextStep(2,3)">Sabah uyanmış doğal halim 😴</button>
+    <button class="btn-secondary" onclick="nextStep(2,3)">Saatlerce süslendiğim halim 💃</button>
 </div>
 
 <!-- STEP 3 -->
 <div id="step3" class="step">
-    <h1>Küçük bir kıskançlık testi 😎</h1>
-    <p>Bugün tek başıma sıpaya gidip gelsem?</p>
-    <button class="btn-secondary" onclick="alert('Hmm… Beklediğim tepki bu değildi 😌 Test devam ediyor.')">Git tabii</button>
-    <button class="btn" onclick="alert('Fena değil 😏 Ama test henüz bitmedi.')">Git ama çabuk gel</button>
+    <h1>Minik Bir Rica 🥺</h1>
+    <p>Bugün tek başıma birazcık sıpaya gidip gelsem?</p>
+    <button class="btn" onclick="alert('Hmm… Biraz daha kıskançlık beklerdim 😏 Test devam ediyor.')">Git tabii ✨</button>
+    <button class="btn-secondary" onclick="alert('Fena değil 😎 Ama test bitmedi.')">Git ama çabuk gel</button>
     <br>
     <button class="btn" onclick="nextStep(3,4)">Devam</button>
 </div>
 
-<!-- STEP 4 -->
+<!-- STEP 4 FINAL -->
 <div id="step4" class="step">
-    <h1>Sence seni ne kadar seviyorum?</h1>
-    <button class="btn-secondary" onclick="showCelebration()">Biraz ❤️</button>
-    <button class="btn" onclick="showCelebration()">Tahmin edemem ❤️</button>
+    <h1>Final Sorusu ❤️</h1>
+    <p>Sence seni ne kadar seviyorum?</p>
+    <button class="btn" onclick="showCelebration()">Tahmin edilemeyecek kadar</button>
+    <button class="btn-secondary" onclick="showCelebration()">Ölçülemeyecek kadar</button>
 </div>
 
 <!-- CELEBRATION -->
@@ -184,7 +155,6 @@ function typeWriterEffect(text, elementId, speed = 80) {
     const element = document.getElementById(elementId);
     element.innerHTML = "";
     let i = 0;
-
     function typing() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
@@ -196,7 +166,6 @@ function typeWriterEffect(text, elementId, speed = 80) {
 }
 
 let celebrationStarted = false;
-let heartInterval;
 
 function showCelebration() {
     if (celebrationStarted) return;
@@ -204,7 +173,6 @@ function showCelebration() {
 
     const celebration = document.getElementById('celebration');
     const overlay = document.getElementById("darkOverlay");
-    const music = document.getElementById("bgMusic");
 
     celebration.style.display = 'flex';
 
@@ -212,12 +180,9 @@ function showCelebration() {
         overlay.classList.add("active");
     }, 50);
 
-    music.volume = 0.4;
-    music.play().catch(() => {});
-
     typeWriterEffect("Elif ❤️", "typewriter", 100);
 
-    heartInterval = setInterval(() => {
+    setInterval(() => {
         const heart = document.createElement('div');
         heart.classList.add('heart');
         heart.innerHTML = '❤️';
