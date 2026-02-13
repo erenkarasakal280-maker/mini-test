@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
+
+.step {
+    display: none;
+    padding: 20px;
+}
+
+.step.active {
+    display: block;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+}
+
+button {
+    padding: 12px 22px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.btn {
+    background: #ff4d6d;
+    color: white;
+}
+
+.btn-secondary {
+    background: #444;
+    color: white;
+}
+
+/* Celebration */
+
+#celebration {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#darkOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    backdrop-filter: blur(0px);
+    transition: background 1.5s ease, backdrop-filter 1.5s ease;
+    z-index: 1;
+}
+
+#darkOverlay.active {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+}
+
+.celebration-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+}
+
+#typewriter {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px rgba(255,255,255,0.7);
+}
+
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 22px;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- STEP 1 -->
+<div id="step1" class="step active">
+    <h1>Mini Test Başlıyor</h1>
+    <button class="btn" onclick="nextStep(1,2)">Başla</button>
+</div>
+
+<!-- STEP 2 -->
+<div id="step2" class="step">
+    <h1>Issız adaya düşsek...</h1>
+    <p>Yanına kimi alırsın?</p>
+    <button class="btn" onclick="nextStep(2,3)">Seni</button>
+    <button class="btn-secondary" onclick="nextStep(2,3)">WiFi</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="step3" class="step">
+    <h1>Küçük bir kıskançlık testi 😎</h1>
+    <p>Bugün tek başıma sıpaya gidip gelsem?</p>
+    <button class="btn-secondary" onclick="alert('Hmm… Beklediğim tepki bu değildi 😌 Test devam ediyor.')">Git tabii</button>
+    <button class="btn" onclick="alert('Fena değil 😏 Ama test henüz bitmedi.')">Git ama çabuk gel</button>
+    <br>
+    <button class="btn" onclick="nextStep(3,4)">Devam</button>
+</div>
+
+<!-- STEP 4 -->
+<div id="step4" class="step">
+    <h1>Sence seni ne kadar seviyorum?</h1>
+    <button class="btn-secondary" onclick="showCelebration()">Biraz ❤️</button>
+    <button class="btn" onclick="showCelebration()">Tahmin edemem ❤️</button>
+</div>
+
+<!-- CELEBRATION -->
+<div id="celebration">
+    <div id="darkOverlay"></div>
+
+    <div class="celebration-content">
+        <h1 id="typewriter"></h1>
+        <p style="font-size: 1.4rem;">Tahmin edilemeyecek kadar değil…</p>
+        <p><strong>Sonsuz kadar seviyorum.</strong></p>
+        <p>İyi ki varsın. İyi ki benimlesin.</p>
+    </div>
+</div>
+
+<script>
+function nextStep(current, next) {
+    document.getElementById("step"+current).classList.remove("active");
+    document.getElementById("step"+next).classList.add("active");
+}
+
+function typeWriterEffect(text, elementId, speed = 80) {
+    const element = document.getElementById(elementId);
+    element.innerHTML = "";
+    let i = 0;
+
+    function typing() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+let celebrationStarted = false;
+let heartInterval;
+
+function showCelebration() {
+    if (celebrationStarted) return;
+    celebrationStarted = true;
+
+    const celebration = document.getElementById('celebration');
+    const overlay = document.getElementById("darkOverlay");
+    const music = document.getElementById("bgMusic");
+
+    celebration.style.display = 'flex';
+
+    setTimeout(() => {
+        overlay.classList.add("active");
+    }, 50);
+
+    music.volume = 0.4;
+    music.play().catch(() => {});
+
+    typeWriterEffect("Elif ❤️", "typewriter", 100);
+
+    heartInterval = setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }, 150);
+}
+</script>
+
+</body>
+</html>
